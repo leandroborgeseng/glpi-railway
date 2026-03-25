@@ -2,7 +2,7 @@ FROM glpi/glpi:11
 
 USER root
 
-RUN a2dismod mpm_event mpm_worker || true \
- && a2enmod mpm_prefork || true
+COPY docker-entrypoint-railway.sh /usr/local/bin/docker-entrypoint-railway.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint-railway.sh
 
-EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint-railway.sh"]
